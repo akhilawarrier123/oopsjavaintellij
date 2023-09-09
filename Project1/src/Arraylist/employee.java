@@ -1,4 +1,4 @@
-package encap;
+package Arraylist;
 
 public class employee {
 
@@ -21,16 +21,12 @@ public class employee {
         this.age=n2;
     }
 
-    public String getName() {
+    public String get_name(String n) {
         return name;
     }
 
-    public String getSurname() {
+    public String get_surname(String n1) {
         return surname;
-    }
-
-    public int getAge() {
-        return age;
     }
 
     @Override
@@ -46,11 +42,6 @@ public class employee {
         return age;
 
 
-    }
-    public void showprintdetails(){
-        System.out.println(getName());
-        System.out.println(getAge());
-        System.out.println(getSurname());
     }
 
 }

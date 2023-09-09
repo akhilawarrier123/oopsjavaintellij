@@ -30,7 +30,7 @@ emp.set_surname("Warrier");
         emp3.set_surname("Variyath");
         emp3.set_age(21);
 
-       /* ArrayList<employee> A1= new ArrayList<employee>();
+        ArrayList<employee> A1= new ArrayList<employee>();
         A1.add(emp);
         A1.add(emp1);
         A1.add(emp2);
@@ -38,7 +38,7 @@ emp.set_surname("Warrier");
 
         for(employee X:A1) {
             System.out.println(X);
-        }*/
+        }
 
                    System.out.println( emp);
           System.out.println( emp1);
