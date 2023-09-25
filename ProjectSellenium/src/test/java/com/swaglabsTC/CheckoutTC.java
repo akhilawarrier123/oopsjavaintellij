@@ -1,26 +1,46 @@
-package swaglabsTC;
+package com.swaglabsTC;
 
-import Swaglabs.*;
-import Swaglabs.Cartpage;
+//import Swaglabs.*;
+import com.swaglabs.pages.Cartpage;
+import com.swaglabs.pages.CheckoutPage;
+import com.swaglabs.pages.InventoryPage;
+import com.swaglabs.pages.LogInPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-public class CheckoutTC {
+import java.time.Duration;
 
-    public static void main(String[] args) {
+
+
+    /*public static void main(String[] args) {
         CheckoutTC checkOutTC = new CheckoutTC();
         checkOutTC.TC1_enter_Details();
 
         checkOutTC.Tc2_CheckTotalPrice();
 
-    }
+    }*/
 
+    public class CheckoutTC {
 
+        ThreadLocal<WebDriver>webDriverThreadLocal=new ThreadLocal<>();
+        WebDriver driver;
+
+        @Parameters({"browser"})
+        @BeforeMethod
+        public void initBrowser(@Optional(value = "chrome") String browserName){
+            if(browserName.equals("chrome")) {
+                webDriverThreadLocal.set(new ChromeDriver());
+                webDriverThreadLocal.get();
+                webDriverThreadLocal.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+            }
+        }
+
+    @Test
     public void TC1_enter_Details(){
 
         WebDriver driver = new ChromeDriver();
-        LogInPage loginPage = new LogInPage(driver);
+        LogInPage loginPage = new LogInPage(webDriverThreadLocal.get());
         loginPage.login("standard_user", "secret_sauce");
 
         InventoryPage inventoryPage = new InventoryPage(driver);
@@ -34,12 +54,12 @@ public class CheckoutTC {
 
 
 
-        Cartpage cartPage = new Cartpage(driver);
+        Cartpage cartPage = new Cartpage(webDriverThreadLocal.get());
 
         cartPage.Verify_product_Added(Cartpage.Backpack_locator);
         cartPage.Check_checkoutButton();
 
-        CheckoutPage checkOutPage = new CheckoutPage(driver);
+        CheckoutPage checkOutPage = new CheckoutPage(webDriverThreadLocal.get());
         checkOutPage.fillDetails("Akhila", "Warrier", "560087");
 
 
@@ -50,10 +70,10 @@ public class CheckoutTC {
 
 
     }
-
+@Test
 public void Tc2_CheckTotalPrice(){
     WebDriver driver = new ChromeDriver();
-    LogInPage loginPage = new LogInPage(driver);
+    LogInPage loginPage = new LogInPage(webDriverThreadLocal.get());
     loginPage.login("standard_user", "secret_sauce");
 
     InventoryPage inventoryPage = new InventoryPage(driver);
@@ -67,12 +87,12 @@ public void Tc2_CheckTotalPrice(){
 
 
 
-    Cartpage cartPage = new Cartpage(driver);
+    Cartpage cartPage = new Cartpage(webDriverThreadLocal.get());
 
     cartPage.Verify_product_Added(Cartpage.Backpack_locator);
     cartPage.Check_checkoutButton();
 
-    CheckoutPage checkOutPage = new CheckoutPage(driver);
+    CheckoutPage checkOutPage = new CheckoutPage(webDriverThreadLocal.get());
     checkOutPage.fillDetails("Akhila", "Warrier", "560087");
     checkOutPage.calculateTotal();
 
@@ -80,5 +100,11 @@ public void Tc2_CheckTotalPrice(){
     checkOutPage.check_backtohome();
 
 }
+        @AfterMethod
+        public void closeBrowser(){
+
+            webDriverThreadLocal.get().quit();
+        }
+
 
 }

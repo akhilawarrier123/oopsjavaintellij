@@ -1,4 +1,4 @@
-package Swaglabs;
+package com.swaglabs.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,15 +7,14 @@ import org.testng.Assert;
 
 import java.util.List;
 
-
-public class CheckoutPage {
-
+public class Negetive_testing {
 
     WebDriver driver;
 
-    public CheckoutPage(WebDriver driver) {
+    public Negetive_testing(WebDriver driver) {
         this.driver = driver;
-
+        this.driver.manage().window().maximize();
+        this.driver.get("https://www.saucedemo.com/");
     }
 
     public static String firstNameLocator = "first-name";
@@ -27,8 +26,6 @@ public class CheckoutPage {
 
     public static String taxLocator="//div[@class='summary_info']/div[@class='summary_tax_label']";//parent child classes
     public static String TotalPriceLocator="//div[@class='summary_info']/div[@class='summary_info_label summary_total_label']";
-    public static String Finish_buttonlocator="finish";
-    public static String Back_buttonlocator="back-to-products";
 
     public void fillDetails(String fN, String lN, String pinCode) {
         driver.findElement(By.id(firstNameLocator)).sendKeys(fN);
@@ -37,32 +34,29 @@ public class CheckoutPage {
         driver.findElement(By.id(ContinueLocator)).click();
     }
 
-   public float calculatePrice() {
-//String price=driver.findElement(By.className("inventory_item_price")).getText();
 
-        List<WebElement> priceList = driver.findElements(By.className(priceLocator));
+    public float null_taxtesting(){
+    List<WebElement> priceList = driver.findElements(By.className(priceLocator));
 
-        float sum = 0;
-        for (int i = 0; i < priceList.size(); i++) {
+    float sum = 0;
+    for (int i = 0; i < priceList.size(); i++) {
 
 
-            String currentWebElementPrice = priceList.get(i).getText().replace("$", "").trim();
+        String currentWebElementPrice = priceList.get(i).getText().replace("$", "").trim();
 
-            float CurrentpriceFloat = Float.parseFloat(currentWebElementPrice);
-            sum = sum + CurrentpriceFloat;
-            System.out.println("currentWebElementPrice" + CurrentpriceFloat);
-        }
-
-        System.out.println(sum);
-        return sum;
-
+        float CurrentpriceFloat = Float.parseFloat(currentWebElementPrice);
+        sum = sum + CurrentpriceFloat;
+        System.out.println("currentWebElementPrice" + CurrentpriceFloat);
     }
 
+    System.out.println(sum);
+    return sum;
 
-    public void calculateTotal(){
+}
+    public void null_calculateTotal(){
 
 
-        float itemprice=calculatePrice();
+        float itemprice=null_taxtesting();
 
         WebElement taxElement =driver.findElement(By.xpath(taxLocator));
         String tax=taxElement.getText().replace("Tax: $","");
@@ -84,41 +78,4 @@ public class CheckoutPage {
 
 
 
-    public void check_finishbutton(){
-        WebElement finishButton= driver.findElement(By.id(Finish_buttonlocator));
-        finishButton.click();
-    }
-    public void check_backtohome(){
-        WebElement backhomebutton= driver.findElement(By.id( Back_buttonlocator));
-        backhomebutton.click();
-    }
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

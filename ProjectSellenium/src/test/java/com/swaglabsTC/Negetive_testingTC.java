@@ -1,18 +1,29 @@
-package swaglabsTC;
+package com.swaglabsTC;
 
-import Swaglabs.*;
+//import Swaglabs.*;
+import com.swaglabs.pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-public class Negetive_testingTC {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Negetive_testingTC NTC=new Negetive_testingTC();
         NTC.testing1_negetive_conditions();
         NTC.testing2_negetive_conditions();
-    }
+    }*/
 
+public class Negetive_testingTC {
+
+    WebDriver driver;
+
+    @Parameters({"browser"})
+    @BeforeMethod
+    public void initBrowser(@Optional(value = "chrome") String browserName){
+        if(browserName.equals("chrome")) {
+            driver = new ChromeDriver();
+        }
+    }
     public void testing1_negetive_conditions(){
 
         WebDriver driver = new ChromeDriver();
@@ -57,4 +68,10 @@ public class Negetive_testingTC {
         Negetivetesting.null_taxtesting();
         Negetivetesting.null_calculateTotal();
     }
+    @AfterMethod
+    public void closeBrowser(){
+        driver.quit();
+    }
+
+
 }

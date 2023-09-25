@@ -1,11 +1,15 @@
-package Swaglabs;
+package com.swaglabs.pages;
 
+import helper.WaitUtility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.List;
 
 public class InventoryPage {
@@ -39,6 +43,12 @@ public class InventoryPage {
     }
 
     public void Verify_inventory_Page_title(){
+       // WebDriverWait  webDriverWait=new WebDriverWait(driver, Duration.ofSeconds(10));
+       // webDriverWait.until(ExpectedConditions.urlToBe("https://www.saucedemo.com/"));
+
+        WaitUtility.waitUntil(driver,10,ExpectedConditions.urlToBe("https://www.saucedemo.com/inventory.html"));
+
+
         WebElement TitleElement = driver.findElement(By.xpath(Inventory_title));
         String actual_tilename=TitleElement.getText();
         String expected_titlename="Swag Labs";
@@ -53,6 +63,7 @@ public class InventoryPage {
         System.out.println("add to cart button clicked");
     }
     public void Add_Product(String locator){
+      //  WaitUtility.waitUntil(driver,10,ExpectedConditions.elementToBeSelected(Element));
         WebElement  Element= driver.findElement(By.id(locator));
         Element.click();
 

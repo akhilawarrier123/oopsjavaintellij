@@ -1,9 +1,12 @@
-package Swaglabs;
+package com.swaglabs.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class Cartpage {
 
@@ -25,8 +28,12 @@ public  static String Checkout_locator="checkout";
         LogInPage logpage=new LogInPage(driver);
         logpage.login("standard_user","secret_sauce");
     }
+    public void Verify_inventory_Page_title() {
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        webDriverWait.until(ExpectedConditions.urlToBe("https://www.saucedemo.com/cart.html"));
+    }
 
-    public void Verify_product_Added(String locator)
+        public void Verify_product_Added(String locator)
 
     {
         WebElement CartButton=driver.findElement(By.className(cartbuttonlocator));
