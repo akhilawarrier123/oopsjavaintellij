@@ -2,16 +2,21 @@
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Swag Labs" verbose="1">
-   <test name="inventory" parallel="methods" thread-count="3">
+<suite name="Swaglabs" verbose="1">
+
+
+<test name="Scenarios" parallel="methods" thread-count="2">
+
+
 
        <classes>
-     <class name="swaglabsTC.LogInPageTC" />
-   <class name="swaglabsTC.InventoryTC"/>
+
+           <class name="com.swaglabsTC.LogInPageTC"/>
+
 
 </classes>
 
-    </test>
 
+</test>
 
 </suite>
